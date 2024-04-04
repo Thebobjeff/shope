@@ -1,6 +1,6 @@
 import { ListCard } from "./ListCard";
 
-export const Itemslist = () => {
+export const Itemslist = ({ products }) => {
   return (
     <section className="justify-center">
       <div className="m-10 ">
@@ -28,9 +28,10 @@ export const Itemslist = () => {
             </tr>
           </thead>
           <tbody>
-            <ListCard />
-            <ListCard />
-            <ListCard />
+            {products &&
+              products.map((info) => (
+                <ListCard key={info.id} products={info} />
+              ))}
           </tbody>
         </table>
       </div>
