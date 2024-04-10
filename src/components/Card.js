@@ -1,14 +1,33 @@
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CardContext";
+import { useEffect, useState } from "react";
 
 export const Card = ({ product }) => {
+  const add =
+    "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
+  const remove =
+    "text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900";
+  const [clicked, setClicked] = useState(false);
+  const { cartList, addToCart, removeItem } = useCart();
   const { name, price, image } = product;
+
+  useEffect(() => {
+    const productCart = cartList.find((cartItem) => cartItem.id === product.id);
+    if (productCart) {
+      setClicked(true);
+    } else {
+      setClicked(false);
+      removeItem(product);
+    }
+  }, [cartList, product, removeItem]);
+
   return (
     <div className="m-3 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <Link to="#">
-        <img className="p-8 rounded-t-lg" src={image} alt="" />
+      <Link to="/">
+        <img className="p-8 rounded-t-lg min-h-76" src={image} alt="" />
       </Link>
       <div className="px-5 pb-5">
-        <Link to="#">
+        <Link to="/">
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
             {name}
           </h5>
@@ -17,12 +36,14 @@ export const Card = ({ product }) => {
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
             ${price}
           </span>
-          <Link
-            to="#"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          <button
+            onClick={
+              clicked ? () => removeItem(product) : () => addToCart(product)
+            }
+            className={clicked ? remove : add}
           >
-            Add to cart
-          </Link>
+            {clicked ? "Remove Item" : "Add to cart"}
+          </button>
         </div>
       </div>
     </div>

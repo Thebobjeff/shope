@@ -1,7 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { useCart } from "../context/CardContext";
 
 export const Header = () => {
+  const { cartList } = useCart();
   const active =
     "block py-6 px-9 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500 ";
 
@@ -26,7 +28,7 @@ export const Header = () => {
               type="button"
               className="dark:text-white hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Cart Items 2
+              Cart Items: {cartList.length}
             </button>
             <button
               data-collapse-toggle="navbar-cta"

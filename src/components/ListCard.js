@@ -1,4 +1,7 @@
+import { useCart } from "../context/CardContext";
+
 export const ListCard = ({ products }) => {
+  const { removeItem } = useCart();
   const { name, price, image } = products;
   return (
     <tr className="my-3 bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -72,8 +75,9 @@ export const ListCard = ({ products }) => {
       </td>
       <td className="px-6 py-4">
         <button
+          onClick={() => removeItem(products)}
           type="button"
-          class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
         >
           Remove
         </button>
