@@ -1,10 +1,9 @@
 import { Card } from "./Card";
 
-export const Page = ({ products }) => {
+export const Page = ({ item }) => {
   return (
     <main className="flex flex-wrap justify-center">
-      {products &&
-        products.map((info) => <Card key={info.id} product={info} />)}
+      {item && item.map((info) => <Card key={info.id} product={info} />)}
     </main>
   );
 };

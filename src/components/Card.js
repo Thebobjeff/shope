@@ -9,26 +9,24 @@ export const Card = ({ product }) => {
     "text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900";
   const [clicked, setClicked] = useState(false);
   const { cartList, addToCart, removeItem } = useCart();
-  const { name, price, image } = product;
+  const { id, name, price, image } = product;
 
   useEffect(() => {
-    const productCart = cartList.find((cartItem) => cartItem.id === product.id);
-    if (productCart) {
-      setClicked(true);
-    } else {
-      setClicked(false);
-      removeItem(product);
+    if (product) {
+      const productCart = cartList.find(
+        (cartItem) => cartItem.id === product.id
+      );
+      setClicked(!!productCart); // Set clicked based on whether the product is in cartList
     }
-  }, [cartList, product, removeItem]);
-
+  }, [cartList, product]);
   return (
-    <div className="m-3 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <Link to="/">
-        <img className="p-8 rounded-t-lg min-h-76" src={image} alt="" />
+    <div className="m-3 w-full  max-w-sm bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <Link to={`/product/${id}`}>
+        <img className="p-8 rounded-t-lg" src={image} alt="" />
       </Link>
       <div className="px-5 pb-5">
-        <Link to="/">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+        <Link to={`/product/${id}`}>
+          <h5 className="text-xl mb-1 font-semibold tracking-tight text-gray-900 dark:text-white">
             {name}
           </h5>
         </Link>
