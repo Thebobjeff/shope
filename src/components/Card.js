@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 
 export const Card = ({ product }) => {
   const add =
-    "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
+    "text-white sm:hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
   const remove =
-    "text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900";
+    "text-white sm:hidden  bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900";
   const [clicked, setClicked] = useState(false);
   const { cartList, addToCart, removeItem } = useCart();
   const { id, name, price, image } = product;
@@ -20,7 +20,7 @@ export const Card = ({ product }) => {
     }
   }, [cartList, product]);
   return (
-    <div className="m-3 w-full  max-w-sm bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="m-3 w-full  sm:mr-2 max-w-sm bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <Link to={`/product/${id}`}>
         <img className="p-8 rounded-t-lg" src={image} alt="" />
       </Link>
@@ -31,7 +31,7 @@ export const Card = ({ product }) => {
           </h5>
         </Link>
         <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900 dark:text-white">
+          <span className="text-3xl sm:mt-2 font-bold text-gray-900 dark:text-white">
             ${price}
           </span>
           <button
